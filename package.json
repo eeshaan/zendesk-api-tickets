@@ -1,0 +1,15 @@
+{
+  "name": "zendesk-api-tickets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "authenticate": "node src/authentication.js"
+  },
+  "author": "Eeshaan Pirani",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "prompts": "^2.4.0"
+  }
+}
