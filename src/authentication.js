@@ -18,7 +18,10 @@ const fs = require("fs");
       name: "authentication_method",
       message: "Specify the authentication type",
       choices: [
-        { title: "API Token", description: "Retrieved from Zendesk dashboard" },
+        {
+          title: "API Token",
+          description: "Retrieved from Zendesk admin dashboard",
+        },
         { title: "Password" },
       ],
       hint:
@@ -27,12 +30,12 @@ const fs = require("fs");
       initial: 0,
     },
     {
-      type: (prev) => (prev == 0 ? "password" : null),
+      type: (prev) => (prev === 0 ? "password" : null),
       name: "api_token",
       message: "API Token",
     },
     {
-      type: (prev) => (prev == 1 ? "password" : null),
+      type: (prev) => (prev === 1 ? "password" : null),
       name: "password",
       message: "Password",
     },
