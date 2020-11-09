@@ -9,9 +9,10 @@ html(lang='en')
     main#main
     h1.ui.center.aligned.header Zendesk Tickets
     .ui.container
-      table.ui.celled.table.center.aligned
+      table.ui.celled.table.aligned
         thead
           tr
+            th
             th ID
             th Subject
             th Requester
@@ -21,8 +22,13 @@ html(lang='en')
         tbody
           each ticket in tickets
             tr
+              td #{ticket.status}
               td #{ticket.id}
               td #{ticket.subject}
+              td
+              td #{new Date(ticket.updated_at).toLocaleString()}
+              td
+              td
         tfoot
           tr
             th(colspan='6')
