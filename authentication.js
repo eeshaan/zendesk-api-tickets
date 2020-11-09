@@ -43,7 +43,7 @@ const fs = require("fs");
 
   if (response.authentication_method === 0) {
     fs.writeFile(
-      ".env",
+      ".env.local",
       `SUBDOMAIN=${response.subdomain}
 EMAIL=${response.email}
 USING_API_AUTH=true
@@ -55,7 +55,7 @@ API_TOKEN=${response.api_token}`,
     );
   } else {
     fs.writeFile(
-      ".env",
+      ".env.local",
       `SUBDOMAIN=${response.subdomain}
 EMAIL=${response.email}
 USING_API_AUTH=false

@@ -1,24 +1,19 @@
 {
   "name": "zendesk-api-tickets",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "authenticate": "node src/authentication.js",
-    "dev": "nodemon --inspect src/index.js",
-    "start": "node src/index.js"
+    "authenticate": "node authentication.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "Eeshaan Pirani",
-  "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "node-zendesk": "^2.0.3",
-    "prompts": "^2.4.0",
-    "pug": "^3.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
+    "next": "10.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.1"
   }
 }
