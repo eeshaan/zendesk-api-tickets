@@ -9,7 +9,7 @@ function Main({ tickets, users, groups }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <Table celled>
+        <Table celled selectable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell></Table.HeaderCell>
@@ -24,8 +24,13 @@ function Main({ tickets, users, groups }) {
           <Table.Body>
             {tickets.tickets.map((ticket) => (
               <Table.Row>
-                <Table.Cell>
-                  <Label ribbon>{ticket.status.toUpperCase()}</Label>
+                <Table.Cell collapsing>
+                  <Label
+                    ribbon
+                    color={ticket.status === "open" ? "orange" : ""}
+                  >
+                    {ticket.status.toUpperCase()}
+                  </Label>
                 </Table.Cell>
                 <Table.Cell>{ticket.id}</Table.Cell>
                 <Table.Cell>{ticket.subject}</Table.Cell>
