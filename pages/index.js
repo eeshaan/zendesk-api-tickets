@@ -86,9 +86,11 @@ export async function getStaticProps() {
         "Content-Type": "application/json",
         Authorization:
           "Basic " +
-          Buffer.from(`${process.env.EMAIL}:${process.env.PASSWORD}`).toString(
-            "base64"
-          ),
+          Buffer.from(
+            process.env.USING_API_AUTH === "true"
+              ? `${process.env.EMAIL}/token:${process.env.API_TOKEN}`
+              : `${process.env.EMAIL}:${process.env.PASSWORD}`
+          ).toString("base64"),
       },
     }
   );
@@ -101,9 +103,11 @@ export async function getStaticProps() {
         "Content-Type": "application/json",
         Authorization:
           "Basic " +
-          Buffer.from(`${process.env.EMAIL}:${process.env.PASSWORD}`).toString(
-            "base64"
-          ),
+          Buffer.from(
+            process.env.USING_API_AUTH === "true"
+              ? `${process.env.EMAIL}/token:${process.env.API_TOKEN}`
+              : `${process.env.EMAIL}:${process.env.PASSWORD}`
+          ).toString("base64"),
       },
     }
   );
@@ -116,9 +120,11 @@ export async function getStaticProps() {
         "Content-Type": "application/json",
         Authorization:
           "Basic " +
-          Buffer.from(`${process.env.EMAIL}:${process.env.PASSWORD}`).toString(
-            "base64"
-          ),
+          Buffer.from(
+            process.env.USING_API_AUTH === "true"
+              ? `${process.env.EMAIL}/token:${process.env.API_TOKEN}`
+              : `${process.env.EMAIL}:${process.env.PASSWORD}`
+          ).toString("base64"),
       },
     }
   );
