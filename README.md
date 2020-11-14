@@ -38,4 +38,17 @@ $ npm run dev
 ```
 
 ### 🚀 Deploying
-This repository is ready to be deployed with [Vercel](https://vercel.com). Simply use this repository's URL and add the environment variables.
+This repository is ready to be deployed with [Vercel](https://vercel.com). Just add your authentication environment variables.
+  
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/eeshaan/zendesk-api-tickets)  
+
+View the example at [https://zendesk-api-tickets.vercel.app](https://zendesk-api-tickets.vercel.app)
+
+## Reflection
+### Challenges
+#### Choosing a stack
+#### Keeping things simple
+### Potential Improvements
+- [ ] things
+- [ ] to
+- [ ] improve
