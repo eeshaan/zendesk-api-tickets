@@ -1,7 +1,12 @@
 import Head from "next/head";
-import { Container, Icon, Label, Menu, Table } from "semantic-ui-react";
+import Link from "next/link";
+import { useState } from "react";
+import { Container, Label, Pagination, Table } from "semantic-ui-react";
 
-function Main({ tickets, users, groups }) {
+const Main = ({ tickets, users, groups }) => {
+  const [page, setPage] = useState(1);
+  const pageSize = 25;
+
   return (
     <>
       <Head>
@@ -22,57 +27,58 @@ function Main({ tickets, users, groups }) {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {tickets.tickets.map((ticket) => (
-              <Table.Row>
-                <Table.Cell collapsing>
-                  <Label
-                    ribbon
-                    color={ticket.status === "open" ? "orange" : ""}
-                  >
-                    {ticket.status.toUpperCase()}
-                  </Label>
-                </Table.Cell>
-                <Table.Cell>{ticket.id}</Table.Cell>
-                <Table.Cell>{ticket.subject}</Table.Cell>
-                <Table.Cell>
-                  {
-                    users.users.find((user) => user.id === ticket.requester_id)
-                      .name
-                  }
-                </Table.Cell>
-                <Table.Cell>
-                  {new Date(ticket.updated_at).toLocaleString()}
-                </Table.Cell>
-                <Table.Cell>
-                  {
-                    groups.groups.find((group) => group.id === ticket.group_id)
-                      .name
-                  }
-                </Table.Cell>
-                <Table.Cell>
-                  {
-                    users.users.find((user) => user.id === ticket.assignee_id)
-                      .name
-                  }
-                </Table.Cell>
-              </Table.Row>
+            {tickets.tickets.slice((page - 1) * pageSize, page * pageSize).map((ticket) => (
+              <Link href="ticket">
+                <Table.Row key={ticket}>
+                  <Table.Cell collapsing>
+                    <Label
+                      ribbon
+                      color={ticket.status === "open" ? "orange" : null}
+                    >
+                      {ticket.status.toUpperCase()}
+                    </Label>
+                  </Table.Cell>
+                  <Table.Cell>{ticket.id}</Table.Cell>
+                  <Table.Cell>{ticket.subject}</Table.Cell>
+                  <Table.Cell>
+                    {
+                      users.users.find(
+                        (user) => user.id === ticket.requester_id
+                      ).name
+                    }
+                  </Table.Cell>
+                  <Table.Cell>
+                    {new Date(ticket.updated_at).toLocaleString()}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {
+                      groups.groups.find(
+                        (group) => group.id === ticket.group_id
+                      ).name
+                    }
+                  </Table.Cell>
+                  <Table.Cell>
+                    {
+                      users.users.find((user) => user.id === ticket.assignee_id)
+                        .name
+                    }
+                  </Table.Cell>
+                </Table.Row>
+              </Link>
             ))}
           </Table.Body>
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan="12">
-                <Menu floated="right" pagination>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron left" />
-                  </Menu.Item>
-                  <Menu.Item as="a">1</Menu.Item>
-                  <Menu.Item as="a">2</Menu.Item>
-                  <Menu.Item as="a">3</Menu.Item>
-                  <Menu.Item as="a">4</Menu.Item>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron right" />
-                  </Menu.Item>
-                </Menu>
+                <Pagination
+                  floated="right"
+                  onPageChange={(event, data) => {
+                    setPage(data.activePage);
+                  }}
+                  firstItem={null}
+                  lastItem={null}
+                  totalPages={Math.ceil(tickets.tickets.length / pageSize)}
+                />
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>
@@ -80,9 +86,9 @@ function Main({ tickets, users, groups }) {
       </Container>
     </>
   );
-}
+};
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const get_tickets = await fetch(
     `https://${process.env.SUBDOMAIN}.zendesk.com/api/v2/tickets.json`,
     {
@@ -134,7 +140,9 @@ export async function getStaticProps() {
     }
   );
 
-  const tickets = await get_tickets.json();
+  const tickets = await get_tickets.json().catch((err) => {
+    console.log(err);
+  });
   const users = await get_users.json();
   const groups = await get_groups.json();
 
@@ -146,6 +154,6 @@ export async function getStaticProps() {
     },
     revalidate: 5, // check for updates every 5 seconds at most
   };
-}
+};
 
 export default Main;
