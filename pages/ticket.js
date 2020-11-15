@@ -1,13 +1,20 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Button, Container, Icon } from "semantic-ui-react";
 
 const Ticket = () => {
+  const router = useRouter();
+  const {
+    query: { subject, desc },
+  } = router;
+
   return (
     <>
       <Head>Ticket Name - Zendesk Tickets</Head>
       <Container>
-        <div>This is a Ticket.</div>
+        <h2>{subject}</h2>
+        <p>{desc}</p>
         <Link href="/">
           <Button animated>
             <Button.Content visible>Back</Button.Content>

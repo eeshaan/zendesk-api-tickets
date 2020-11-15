@@ -27,45 +27,63 @@ const Main = ({ tickets, users, groups }) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {tickets.tickets.slice((page - 1) * pageSize, page * pageSize).map((ticket) => (
-              <Link href="ticket">
-                <Table.Row key={ticket}>
-                  <Table.Cell collapsing>
-                    <Label
-                      ribbon
-                      color={ticket.status === "open" ? "orange" : null}
-                    >
-                      {ticket.status.toUpperCase()}
-                    </Label>
-                  </Table.Cell>
-                  <Table.Cell>{ticket.id}</Table.Cell>
-                  <Table.Cell>{ticket.subject}</Table.Cell>
-                  <Table.Cell>
-                    {
-                      users.users.find(
-                        (user) => user.id === ticket.requester_id
-                      ).name
-                    }
-                  </Table.Cell>
-                  <Table.Cell>
-                    {new Date(ticket.updated_at).toLocaleString()}
-                  </Table.Cell>
-                  <Table.Cell>
-                    {
-                      groups.groups.find(
-                        (group) => group.id === ticket.group_id
-                      ).name
-                    }
-                  </Table.Cell>
-                  <Table.Cell>
-                    {
-                      users.users.find((user) => user.id === ticket.assignee_id)
-                        .name
-                    }
-                  </Table.Cell>
-                </Table.Row>
-              </Link>
-            ))}
+            {tickets.tickets
+              .slice((page - 1) * pageSize, page * pageSize)
+              .map((ticket) => (
+                <Link
+                  href={{
+                    pathname: "/ticket",
+                    query: {
+                      id: ticket.id,
+                      subject: ticket.subject,
+                      desc: ticket.description,
+                    },
+                  }}
+                  as={{
+                    pathname: "/ticket",
+                    query: {
+                      id: ticket.id,
+                    },
+                  }}
+                >
+                  <Table.Row key={ticket}>
+                    <Table.Cell collapsing>
+                      <Label
+                        ribbon
+                        color={ticket.status === "open" ? "orange" : null}
+                      >
+                        {ticket.status.toUpperCase()}
+                      </Label>
+                    </Table.Cell>
+                    <Table.Cell>{ticket.id}</Table.Cell>
+                    <Table.Cell>{ticket.subject}</Table.Cell>
+                    <Table.Cell>
+                      {
+                        users.users.find(
+                          (user) => user.id === ticket.requester_id
+                        ).name
+                      }
+                    </Table.Cell>
+                    <Table.Cell>
+                      {new Date(ticket.updated_at).toLocaleString()}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {
+                        groups.groups.find(
+                          (group) => group.id === ticket.group_id
+                        ).name
+                      }
+                    </Table.Cell>
+                    <Table.Cell>
+                      {
+                        users.users.find(
+                          (user) => user.id === ticket.assignee_id
+                        ).name
+                      }
+                    </Table.Cell>
+                  </Table.Row>
+                </Link>
+              ))}
           </Table.Body>
           <Table.Footer>
             <Table.Row>
