@@ -6,7 +6,8 @@
     "authenticate": "node authentication.js",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "author": "Eeshaan Pirani",
   "dependencies": {
@@ -16,5 +17,12 @@
     "react-dom": "17.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.1.2",
+    "jest": "^26.6.3",
+    "next-page-tester": "^0.5.0",
+    "node-fetch": "^2.6.0"
   }
 }
